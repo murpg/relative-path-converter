@@ -35,6 +35,18 @@ component name='RelativePathConverter' extends='testbox.system.BaseSpec' {
 				expect(relativePath).toBe('../../anotherTestFolder/anotherTestSubFolder/anotherTestFile.cfm');
 			});
 
+			it('throws an exception if the absolute path doesn''t exist', function() {
+				var absolutePath = '/some/path/that/does/not/exist.cfm';
+
+				expect(function() { CUT.convert(absolutePath); }).toThrow(type = 'FileDoesNotExist');
+			});
+
+			it('throws an exception if a relative path is given instead of an absolute path', function() {
+				var absolutePath = 'stubs/testFile.cfm';
+
+				expect(function() { CUT.convert(absolutePath); }).toThrow(type = 'AbsolutePathNeeded');
+			});
+
 			xit('converts correctly across different drives', function() {
 				fail('Test not implemented yet.');
 			});

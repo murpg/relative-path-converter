@@ -3,22 +3,27 @@ component name='RelativePathConverter' {
 	property name='contextPath' type='string' default='/';
 
 	public RelativePathConverter function init(string contextPath = '.') {
-		this.setContextPath(arguments.contextPath);
+		setContextPath(arguments.contextPath);
 
 		return this;
 	}
 
-	public void function setContextPath(required string contextPath) {
+	public RelativePathConverter function setContextPath(required string contextPath) {
 		variables.contextPath = ExpandPath(arguments.contextPath);
+
+		return this;
 	}
 	
 	public string function convert(required string absolutePath) {
-		var relativePath = variables.navigateToAbsolutePath(
+		guardAgainstMissingFile(arguments.absolutePath);
+		guardAgainstRelativePath(arguments.absolutePath);
+
+		var relativePath = navigateToAbsolutePath(
 			currentPath = variables.contextPath,
 			absolutePath = arguments.absolutePath
 		);
 
-		return trimTrailingCharacter(relativePath, '/');
+		return trimTrailingCharacter(character = '/', from = relativePath);
 	}
 
 
@@ -39,14 +44,14 @@ component name='RelativePathConverter' {
 
 		for (var i = 1; i <= maxArrayLength; i++) {
 			if (i > currentPathArrayLength) {
-				return absolutePathArray[i] & '/' & variables.navigateToAbsolutePath(
+				return absolutePathArray[i] & '/' & navigateToAbsolutePath(
 					currentPath = arguments.currentPath & '/' & absolutePathArray[i],
 					absolutePath = arguments.absolutePath
 				);
 			}
 
 			if (i > absolutePathArrayLength || currentPathArray[i] != absolutePathArray[i]) {
-				return '../' & variables.navigateToAbsolutePath(
+				return '../' & navigateToAbsolutePath(
 					currentPath = '/' & ArrayToList(ArraySlice(currentPathArray, 1, currentPathArrayLength - 1), '/'),
 					absolutePath = arguments.absolutePath
 				);
@@ -55,12 +60,32 @@ component name='RelativePathConverter' {
 
 	}
 
-	private string function trimTrailingCharacter(required string str, required string char) {
-		if (Right(arguments.str, 1) == arguments.char) {
-			return Left(arguments.str, Len(arguments.str)-1)
+	private void function guardAgainstMissingFile(required string absolutePath) {
+		if (!FileExists(ExpandPath(arguments.absolutePath))) {
+			throw(
+				type = 'FileDoesNotExist',
+				message = 'The file #arguments.absolutePath# does not exist.'
+			);
+		}
+		return;
+	}
+
+	private void function guardAgainstRelativePath(required string absolutePath) {
+		if (ExpandPath(arguments.absolutePath) != arguments.absolutePath) {
+			throw(
+				type = 'AbsolutePathNeeded',
+				message = 'A relative path [#arguments.absolutePath#] was passed.  An absolute path is required.'
+			);
+		}
+		return;
+	}
+
+	private string function trimTrailingCharacter(required string character, required string from) {
+		if (Right(arguments.from, 1) == arguments.character) {
+			return Left(arguments.from, Len(arguments.from)-1)
 		}
 
-		return arguments.str;
+		return arguments.from;
 	}
 
 }
