@@ -1,91 +1,49 @@
 {
-    "name":"Absolute to Relative Path",
-    "version":"1.0.0",
-    "author":"",
-    "location":"",
-    "directory":"",
-    "createPackageDirectory":true,
-    "packageDirectory":"",
-    "homepage":"",
-    "documentation":"",
-    "repository":{
-        "type":"",
-        "URL":""
+    "name": "Relative Path Converter",
+    "version": "1.0.0",
+    "author": "Eric Peterson",
+    "createPackageDirectory": true,
+    "location": "https://github.com/elpete/relative-path-converter/archive/master.zip",
+    "homepage": "https://github.com/elpete/relative-path-converter",
+    "documentation": "https://github.com/elpete/relative-path-converter",
+    "repository": {
+        "type": "git",
+        "URL": "https://github.com/elpete/relative-path-converter"
     },
-    "bugs":"",
-    "slug":"absolute-to-relative-path",
-    "shortDescription":"Translate an absolute path into a relative path.",
-    "description":"",
-    "instructions":"",
-    "changelog":"",
-    "type":"",
-    "keywords":[
-        
+    "bugs": "https://github.com/elpete/relative-path-converter/issues",
+    "slug": "relative-path-converter",
+    "shortDescription": "Translate an absolute path into a relative path.",
+    "description": "Translate an absolute path into a relative path given a context directory",
+    "instructions": "README.md",
+    "changelog": "https://github.com/elpete/relative-path-converter",
+    "type": "modules",
+    "keywords": [
+        "path",
+        "filesystem",
+        "relative",
+        "absolute"
     ],
-    "private":false,
-    "engines":[
-        {
-            "type":"railo",
-            "version":">=4.1.x"
-        },
-        {
-            "type":"adobe",
-            "version":">=10.0.0"
-        }
+    "private": false,
+    "engines": [
+        { "type": "lucee", "version": ">=4.5.x" },
+        { "type": "railo", "version": ">=4.1.x" },
+        { "type": "adobe", "version": ">=10.0.0" }
     ],
-    "defaultEngine":"",
-    "defaultPort":0,
-    "projectURL":"",
-    "license":[
-        {
-            "type":"",
-            "URL":""
-        }
+    "defaultEngine": "lucee",
+    "defaultPort": 8080,
+    "license": [
+        { "type": "MIT", "URL": "https://github.com/elpete/relative-path-converter/blob/master/LICENSE" }
     ],
-    "contributors":[
-        
-    ],
-    "dependencies":{
-        
-    },
+    "dependencies": {},
     "devDependencies":{
-        "testbox":"2.0.0"
+        "testbox": "2.0.0"
     },
-    "installPaths":{
+    "installPaths": {
         "testbox":"testbox"
     },
-    "ignore":[
+    "ignore": [
         "**/.*",
         "test",
         "tests"
-    ],
-    "testbox":{
-        "runner":[
-            {
-                "default":""
-            }
-        ],
-        "labels":[
-            
-        ],
-        "reporter":"",
-        "reporterResults":"",
-        "bundles":[
-            ""
-        ],
-        "directory":{
-            "mapping":"",
-            "recurse":true
-        },
-        "watchers":[
-            
-        ],
-        "notify":{
-            "emails":[
-                
-            ],
-            "growl":"",
-            "URL":""
-        }
-    }
+    ]
 }
