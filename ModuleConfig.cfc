@@ -9,7 +9,7 @@ component name='ModuleConfig' {
 	this.modelNamespace		= 'RelativePathConverter';
 
 	function configure(){		
-		binder.map('RelativePathConverter').to('#moduleMapping#.models.RelativePathConverter')
+		binder.map('RelativePathConverter').to('#moduleMapping#.models.RelativePathConverter');
 	}
 
 }
